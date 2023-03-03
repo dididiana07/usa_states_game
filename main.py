@@ -47,14 +47,17 @@ def add_state_to_map(state_name, x_cord, y_cord):
 its_running = True
 show_textinput = True
 
+guessed = []
+
 while its_running:
     screen.update()
     if show_textinput:
         try:
             ask_state = textinput(f"{guessed_states}/{total_states} states.", "Enter a state:").title()
-            if check_state(ask_state, data):
+            if check_state(ask_state, data) and ask_state not in guessed:
                 guessed_states += 1
                 add_state_to_map(ask_state, check_state(ask_state, data)[0], check_state(ask_state, data)[1])
+                guessed.append(ask_state)
         except AttributeError:
             pass
     elif guessed_states == total_states:
